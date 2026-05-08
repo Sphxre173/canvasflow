@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/commission_dashboard.css">
+        <link rel="stylesheet" href="/static/commission_work_pending.css">
+        <link rel="stylesheet" href="/static/kanit_font.css">
+        <link rel="stylesheet" href="/static/common.css">
+        <link rel="stylesheet" href="/static/search_bar_tab.css">
+        <link rel="stylesheet" href="/static/work_container.css">
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <title>Commission</title>
+    </head>
+    <body>
+        <div class="nav_bar">
+            <!--CONTINUE TOMORROW-->
+
+            <h3 class="kanit-bold">COMMISSION</h3>
+            <!--<input type="search" placeholder="Search here">-->
+            <div id="cover_a_nav_bar" class="box_colored">
+                <img src="/static/assets/P_to.jpg" id="pfp">
+                
+                <a href="/login_google" id="is_login" class="kanit-medium username">Login</a>
+                <div id="dropdown" class="box_colored">
+                    <button class="drop_down_child kanit-semibold">My Profile</button>
+                    <button class="drop_down_child kanit-semibold" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        <!--SIDE MENU (COLLAPSEABLE)-->
+        <div class="main_layout">
+            <div class="sidebar box_colored">
+                <button class="toggle_item" onclick="toggle_side_bar()">☰</button>
+                <div class="menu_item" onclick="go('/dashboard')">
+                    <span>📊</span>
+                    <span class="text">DASHBOARD</span>
+                </div>
+                
+                <div class="menu_item active" onclick="go('/commission')">
+                    <span>🎨</span>
+                    <span class="text">COMMISSION</span>
+                </div>
+                
+                <div class="menu_item" >
+                    <span>👤</span>
+                    <span class="text">PROFILE</span>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="pending_title box_colored">
+                    <div class="make_box_bigger">
+                        <h1 class="selling_point_header pending_box">Commission Services </h1>
+                        <p class="pending_box opacity_text">Choose what you want me to create</p>
+                    </div>
+                </div>
+                    
+                <div class="work_catalog_container">
+                    <div class="container_catalog_content">
+                        {% for commission in commission_list %}
+                        <div class="card_catalog card_catalog_color_box" 
+                        onclick="open_modal(this)"
+                        data-cms_name="{{ commission[1] }}"
+                        data-price=" {{ commission[3] }}"
+                        data-desc=" {{ commission[4] }}"
+                        data-img_src=" {{ commission[5] }}">
+
+                            <div class="card_catalog_header">
+                                <img src="{{ commission[5] }}">
+                            </div>
+
+                            <div class="card_catalog_body">
+                                <div class="text">
+                                    <span class="span_catalog_header">{{ commission[1] }}</span>
+                                    <p class="catalog_desc">Starting at {{ commission[3] }}THB</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal" class="modal">
+            <div class="modal_content">
+                <div class="modal_content_header">
+                    <div class="close">
+                        <span class="close_button" onclick="close_modal()">x</span>
+                    </div>
+                </div>
+                <div class="modal_content_body">
+                    <div class="modal_content_left">
+                        
+                        <!-- TMRW : DECORATE THIS MODAL TO BE USABLE, LOOKING GOOD AND IDK NOT SUCKS-->
+                        <img src="/static/assets/P_to.jpg" id="prev_image" class="image_modal">
+                    </div>
+
+                    <div class="modal_content_right">
+                        <h2 id="modal_header"></h2>
+                        <span class="phrase">By Nickla</span><br>
+                        <span class="phrase">Starting at <span class="bolder" id="price"></span></span>
+                        <div class="modal_info_box add_10_margin policy">
+                            <h3 class="no_margin add_10_margin">Description</h3>
+                            <p id="description" class="add_10_margin"></p>
+                        </div>
+
+                        <div class="modal_info_box add_10_margin">
+                            <div class="policy">
+                                <h3 class="no_margin add_10_margin">Policy</h3>
+                                <h4 class="no_margin add_10_margin">I <b>DO</b> :</h4>
+                                <ul class="add_10_margin">
+                                    <li>SFW OC</li>
+                                    <li>Simple pose</li>
+                                    <li>Mild gore</li>
+                                </ul>
+
+                                <h4 class="no_margin add_10_margin">I <b>WON'T</b> do</h4>
+                                <ul class="add_10_margin">
+                                    <li>NSFW Content</li>
+                                    <li>Heavy gore</li>
+                                    <li>Mecha</li>
+                                </ul>
+
+                                <h4 class="no_margin add_10_margin">Usage of my work</h4>
+                                <ul class="add_10_margin">
+                                    <li><b>Personal Use</b> : Included (For non commercial-purpose)</li>
+                                    <li><b>Commercial use</b> : +100% of base price</li>
+                                    <li><b>Exclusive use</b> : Not Avaliable</li>
+                                </ul>
+
+                                <h4 class="no_margin add_10_margin">Payment</h4>
+                                <ul class="add_10_margin">
+                                    <li><b>Payment</b> : Full payment before work</li>
+                                </ul>
+                                
+                                <h4 class="no_margin add_10_margin">Revision</h4>
+                                <ul class="add_10_margin">
+                                    <li><b>Revision</b> : 2 times for free!</li>
+                                </ul>
+                                
+                                <h4 class="no_margin add_10_margin">Time</h4>
+                                <ul class="add_10_margin">
+                                    <li><b>Time</b> : 3-7 Days (Depends on queue)</li>
+                                </ul>
+
+                                <h4 class="no_margin add_10_margin">NOTES</h4>
+                                <ul class="add_10_margin">
+                                    <li><b>About work</b> : I reserve the right to decline any commission that goes against my policy.  
+                                        <br><br>Thank you for your understanding.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <label class="consent add_10_margin" id="consent">
+                            <input id="agree_policy" type="checkbox"><p><b>I AGREED</b> to policy</p>
+                        </label>
+                        <button class="primary_button_style add_10_margin align_center" id="proceed" onclick="show_order_info()">Make Request</button>
+
+                        <!-- CUSTOMER INFO HERE -->
+                        <div class="modal_info_box add_10_margin policy" id="order">
+                            <h3 class="no_margin add_10_margin">Describe your OC detail!</h3>
+                            <textarea class="no_margin add_10_margin overflow_y_auto" id="customer_desc" placeholder="Describe here!" required></textarea>
+                            <!-- USER UPLOAD AREA -->
+                            <h3 class="no_margin add_10_margin">Upload your OC! <br><span class="phrase">(Max 5 image)<span></h3>
+                            <div id="preview_container" class="add_10_margin">
+
+                            </div>
+                            <label class="no_margin add_file cursor_pointer">
+                                <div class="flex_center">
+                                    <i data-lucide="upload" ></i>
+                                    <span class="align_end"><b>Upload!</b></span>
+                                    <input type="file" id="imageInput" accept="image/*" hidden name="image" multiple accept=".png,.ai,.jpg,.JPEG,.psd">
+                                </div>
+                            </label>
+                            <h3 class="no_margin add_10_margin">Specify your uses</h3>
+                            <label class="consent add_10_margin">
+                                <input type="radio" name="usage" value="personal">
+                                <p>Personal use</p>
+                            </label>
+
+                            <label class="consent add_10_margin">
+                                <input type="radio" name="usage" value="commercial">
+                                <p>Commercial use (+100%)</p>
+                            </label>
+
+                            <h3 class="no_margin add_10_margin">Total Price : <span id="total_price"></span></h3>
+                            <button class="primary_button_style align_center no_margin add_10_margin" id="make_req">Request!</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/static/commission_intro.js"></script>
+        <script src="/static/update_user_db.js"></script>
+        <script>
+            lucide.createIcons();
+            function toggle_side_bar() {
+                let sidebar = document.querySelector(".sidebar")
+                sidebar.classList.toggle("collapsed")
+            }
+            function go(where) {
+                window.location.href = where;
+            }
+
+            let pop_up = document.getElementById("modal");
+
+            function close_modal() {
+                pop_up.style.display = "none";
+                window.location.reload()
+            }
+
+            function open_modal(info) {
+                document.getElementById("modal_header").innerHTML = info.dataset.cms_name
+                document.getElementById("prev_image").src = info.dataset.img_src
+                document.getElementById("price").innerHTML = info.dataset.price + " THB"
+                document.getElementById("description").innerHTML = info.dataset.desc
+                pop_up.style.display = "flex";
+            }
+
+            let make_req = document.getElementById("make_req")
+            let base_price = document.getElementById("price")
+            let price_displayer = document.getElementById("total_price")
+            let read_radio = document.querySelectorAll("input[name='usage']")
+            read_radio.forEach(function(radio_value) {
+                radio_value.addEventListener("change", function(){
+                    const selected = document.querySelector("input[name='usage']:checked");
+                    if (selected.value === "personal"){
+                        price_displayer.innerHTML = (parseInt(base_price.innerHTML.replace("THB", ""))) + " THB"
+                        make_req.style.display = "flex"
+                    }
+                    else if (selected.value === "commercial"){
+                        price_displayer.innerHTML = (parseInt(base_price.innerHTML.replace("THB", "")) * 2) + " THB"
+                        make_req.style.display = "flex"
+                    }
+                })
+            });
+
+            let img_input = document.getElementById("imageInput")
+            let preview = document.getElementById("preview_container")
+            img_input.addEventListener("change", function() {
+                const files = img_input.files
+
+                preview.innerHTML = ""
+
+                for (let i = 0; i < 5; i++) {
+                    const file = files[i];
+
+                    const url = URL.createObjectURL(file);
+
+                    const img = document.createElement("img");
+                    img.src = url;
+
+                    preview.appendChild(img);
+                }
+            })
+
+
+            /* make a checkbox reader system*/
+            let agree_policy = document.getElementById("agree_policy")
+            let proceed_button = document.getElementById("proceed")
+            let order = document.getElementById("order")
+            let is_show = false
+            
+            agree_policy.addEventListener("change", () => {
+                console.log(agree_policy.checked)
+                if (agree_policy.checked) {
+                    proceed_button.style.display = "flex"
+                }
+                else if (!agree_policy.checked) {
+                    proceed_button.style.display = "none"
+                }
+            })
+
+            function show_order_info() {
+                order.style.display = "flex"
+            }
+
+            /* YOUR idk here*/
+            let request_button = document.getElementById("make_req")
+
+            request_button.addEventListener("click", async () => {
+
+                const description = document.getElementById("customer_desc").value
+
+                const selected_usage = document.querySelector("input[name='usage']:checked")
+
+                const files = document.getElementById("imageInput").files
+
+                const total_price = parseInt(base_price.innerHTML.replace("THB", ""))
+
+                const cms_name = document.getElementById("modal_header").innerText
+
+                let formData = new FormData()
+
+                formData.append("description", description)
+                formData.append("usage", selected_usage.value)
+                formData.append("total_price", total_price)
+                formData.append("cms_name", cms_name)
+
+                // upload หลายรูป
+                for (let i = 0; i < files.length; i++) {
+                    formData.append("images", files[i])
+                }
+
+                const response = await fetch("/make_request", {
+                    method: "POST",
+                    body: formData
+                })
+
+                const data = await response.json()
+
+                console.log(data)
+                if (data.status == "success") {
+                    alert("Success!")
+                    window.location.reload()
+                }
+                else {
+                    alert("Error! cannot add data into database!")
+                    window.location.reload()
+                }
+                
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/commission_dashboard.css">
+        <link rel="stylesheet" href="/static/commission_work_pending.css">
+        <link rel="stylesheet" href="/static/kanit_font.css">
+        <link rel="stylesheet" href="/static/common.css">
+        <link rel="stylesheet" href="/static/search_bar_tab.css">
+        <link rel="stylesheet" href="/static/work_container.css">
+        <link rel="stylesheet" href="/static/admin_assets.css">
+        <title>Pending Dashboard</title>
+    </head>
+
+    <body>
+        <div class="nav_bar">
+            <!--CONTINUE TOMORROW-->
+            <h3 class="kanit-bold">PENDING DASHBOARD</h3>
+            <!--<input type="search" placeholder="Search here">-->
+            <div id="cover_a_nav_bar" class="box_colored">
+                <img src="/static/assets/P_to.jpg" id="pfp">
+                <a href="/login_google" id="is_login" class="kanit-medium username">Login</a>
+                <div id="dropdown" class="box_colored">
+                    <button class="drop_down_child kanit-semibold">My Profile</button>
+                    <button class="drop_down_child kanit-semibold" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        <!--SIDE MENU (COLLAPSEABLE)-->
+        <div class="main_layout">
+            <div class="sidebar box_colored">
+                <button class="toggle_item" onclick="toggle_side_bar()">☰</button>
+                <div class="menu_item active" onclick="go('/dashboard')">
+                    <span class="icon active">📊</span>
+                    <span class="text">DASHBOARD</span>
+                </div>
+                
+                <div class="menu_item" onclick="go('/commission')">
+                    <span>🎨</span>
+                    <span class="text">COMMISSION</span>
+                </div>
+
+                <div class="menu_item">
+                    <span>👤</span>
+                    <span class="text">PROFILE</span>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="pending_title box_colored">
+                    <h1 class="pending_box">PENDING WORK</h1>
+                    <p class="pending_box">Total : {{pending_len}}<p>
+                </div>
+                <!-- DEPRICATED FOR NOW -->
+                <!-- <div class="searchbox_parent box_colored">
+                    <p class="search_bar_info">Search here</p>
+                    <input type="text" class="searchbox" placeholder="Search by 'Email' or 'Workname'">
+                    <button class="primary_button_style">Search!</button>
+                </div> -->
+                {% for pending in pending_list %}
+                <div class="work_container">
+                    <div class="container_content box_colored">
+                        <div class="card_header">
+                            <h2>{{ pending.info[2] }} (Customer : {{ pending.info[1] }})</h2>
+                            <div class="status_box pending">
+                                <div class="point_color pending"></div>
+                                <span class="status"> Pending </span>
+                            </div>
+                        </div>
+
+                        <div class="progress_container admin">
+                            <span class="progress_text">
+                                Progress
+                            </span>
+
+                            <div class="progress_bar_bg">
+                                <div class="progress_bar" data-status="{{ pending.info[5] }}">
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="card_body">
+                            <h4>Description</h4>
+                            <p class="desc">
+                                {{ pending.info[3] }}
+                            </p>
+                            <hr>
+                            <h4>Price</h4>
+                            <p class="price">
+                                {{ pending.info[6] }} THB
+                            </p>
+                        </div>
+
+                        <div class="card_footer">
+                            <div class="uid">Work UID : {{ pending.info[0] }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script src="/static/commission_intro.js"></script>
+        <script src="/static/update_user_db.js"></script>
+        <script src="/static/progress_bar.js"></script>
+        <script>
+            function toggle_side_bar() {
+                let sidebar = document.querySelector(".sidebar")
+                sidebar.classList.toggle("collapsed")
+            }
+            function go(where) {
+                window.location.href = where
+            }
+            document.querySelectorAll(".status_select").forEach(function(select) {
+                select.addEventListener("change", function() {
+                    const newStatus = this.value;
+                    const uid = this.dataset.id;
+
+                    fetch("/update_sub_status_db", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            uid: uid,
+                            status: newStatus
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("updated");
+                        location.reload(); // ง่ายสุดก่อน
+                    });
+                });
+            });
+        
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll(".progress_bar").forEach(function(bar) {
+                    let status = bar.dataset.status;
+                    let percent = STATUS_MAP[status] || 0;
+
+                    bar.style.width = percent + "%";
+                });
+            });
+        </script>
+    </body>
+</html>

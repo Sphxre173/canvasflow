@@ -1,0 +1,39 @@
+.searchbox_parent {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: fit-content;
+    gap: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.search_bar_info {
+    font-weight: bold;
+}
+
+.searchbox {
+    flex: 1;
+    height: 28px;
+    align-self: center;
+    border-radius: 10px;
+    border: 1px solid;
+    background-color: #3b3b3b;
+    border: 1px solid #3b3137;
+    transition: 0.3s;
+}
+
+.searchbox:focus {
+    transform: scale(1.02);
+}
+
+
+
+.primary_button_style {
+    height: 30px;
+    align-self: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/commission_dashboard.css">
+        <link rel="stylesheet" href="/static/commission_work_pending.css">
+        <link rel="stylesheet" href="/static/kanit_font.css">
+        <link rel="stylesheet" href="/static/common.css">
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <div class="nav_bar">
+            <!--CONTINUE TOMORROW-->
+            <h3 class="kanit-bold">DASHBOARD</h3>
+            <!--<input type="search" placeholder="Search here">-->
+            <div id="cover_a_nav_bar" class="box_colored">
+                <img src="/static/assets/P_to.jpg" id="pfp">
+                <a href="/login_google" id="is_login" class="kanit-medium username">Login</a>
+                <div id="dropdown" class="box_colored">
+                    <button class="drop_down_child kanit-semibold">My Profile</button>
+                    <button class="drop_down_child kanit-semibold" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        <!--SIDE MENU (COLLAPSEABLE)-->
+        <div class="main_layout">
+            <div class="sidebar box_colored">
+                <button class="toggle_item" onclick="toggle_side_bar()">☰</button>
+                <div class="menu_item active" onclick="go('/dashboard')">
+                    <span>📊</span>
+                    <span class="text">DASHBOARD</span>
+                </div>
+                
+                <div class="menu_item" onclick="go('/commission')">
+                    <span>🎨</span>
+                    <span class="text">COMMISSION</span>
+                </div>
+
+                <div class="menu_item">
+                    <span>👤</span>
+                    <span class="text">PROFILE</span>
+                </div>
+
+                <div>
+
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="welcome_main_box box_colored">
+                    <h2 class="welcome_user">Welcome back, user! (เดี๋ยวกูไปเเก้ที่หลัง ตอนนี้ยังไม่ได้เก็บชื่อผู้ใช้)</h2>
+                    <p class="phrase"></p>
+                    <div>
+                        <div class="row_flexshow">
+                            <div class="flexbox card requesting">
+                                <h3 class="header_status">Requesting Work</h3>
+                                <h2 class="number requesting" id="req_num">{{ requested_len }}</h2>
+                                <button class="requested_button" onclick="go('/dashboard/request_panel')">View Requests</button>
+                            </div>
+                            <div class="flexbox card pending">
+                                <h3 class="header_status">Pending Work</h3>
+                                <h2 class="number pending">{{ pending_len }}</h2>
+                                <button class="pending_button" onclick="go('/dashboard/pending_panel')">Track Progress</button>
+                            </div>
+                            <div class="flexbox card completed">
+                                <h3 class="header_status">Completed work</h3>
+                                <h2 class="number completed">{{ completed_len }}</h2>
+                                <button class="accept_button" onclick="go('/dashboard/completed_panel')">View Results</button>
+                            </div>
+                            <div class="flexbox card cancelled">
+                                <h3 class="header_status">Cancelled Work</h3>
+                                <h2 class="number cancelled">{{ cancelled_len }}</h2>
+                                <button class="reject_button" onclick="go('/dashboard/cancelled_panel')">View History</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="empty-state" id="cta_empty_state">
+                        <h3>No requests yet</h3>
+                        <p>Start your first commission and bring your idea to life.</p>
+                        
+                        <button class="primary_button_style" onclick="go('/commission')">
+                            + Create Request
+                        </button>
+                    </div>
+                </div>
+                <!-- <div class="cta_box box_colored">
+                    <h3>Have a request?</h3>
+                    <p>Check out <span class="important_text">"Commission"</span> tab on your sidebar!</p>
+                </div> -->
+            </div>
+        </div>
+
+        <script src="/static/commission_intro.js"></script>
+
+        
+        <script>
+            function toggle_side_bar() {
+                let sidebar = document.querySelector(".sidebar")
+                sidebar.classList.toggle("collapsed")
+            }
+            function go(where) {
+                window.location.href = where
+            }
+            let req_len = document.getElementById("req_num")
+            let eta_mt_state = document.getElementById("cta_empty_state")
+            console.log(req_len.innerHTML)
+            if (req_len.innerHTML >= 1) {
+                eta_mt_state.style.display = "none";
+            }
+        </script>
+    </body>
+</html>

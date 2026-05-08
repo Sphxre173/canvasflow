@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/commission_dashboard.css">
+        <link rel="stylesheet" href="/static/commission_work_pending.css">
+        <link rel="stylesheet" href="/static/kanit_font.css">
+        <link rel="stylesheet" href="/static/common.css">
+        <title>Admin Page</title>
+    </head>
+    <body>
+        <div class="nav_bar">
+            <!--CONTINUE TOMORROW-->
+            <h3 class="kanit-bold">ADMIN DASHBOARD</h3>
+            <!--<input type="search" placeholder="Search here">-->
+            <div id="cover_a_nav_bar" class="box_colored">
+                <img src="/static/assets/P_to.jpg" id="pfp">
+                <a href="/login_google" id="is_login" class="kanit-medium username">Login</a>
+                <div id="dropdown" class="box_colored">
+                    <button class="drop_down_child kanit-semibold">My Profile</button>
+                    <button class="drop_down_child kanit-semibold" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        <!--SIDE MENU (COLLAPSEABLE)-->
+        <div class="main_layout">
+            <div class="sidebar box_colored">
+                <button class="toggle_item" onclick="toggle_side_bar()">☰</button>
+                <div class="menu_item active" onclick="go('/admin')">
+                    <span>📊</span>
+                    <span class="text">DASHBOARD</span>
+                </div>
+                
+                <div class="menu_item" onclick="go('/admin/admin_commission')">
+                    <span>🎨</span>
+                    <span class="text">COMMISSION</span>
+                </div>
+
+                <div class="menu_item">
+                    <span>👤</span>
+                    <span class="text">PROFILE</span>
+                </div>
+
+                <div>
+
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="welcome_main_box box_colored">
+                    <h2 class="welcome_user">Welcome, ADMIN!</h2>
+                    <p class="phrase">Already awake? Check the Request tab for new commissions, or the Pending tab if you're working on ongoing ones.</p>
+                    <div class="row_flexshow">
+                        <div class="flexbox card requesting">
+                            <h3 class="header_status">Requesting Work</h3>
+                            <h2 class="number requesting">{{ request_len }}</h2>
+                            <button class="requested_button" onclick="go('/admin/request_panel')">View</button>
+                        </div>
+                        <div class="flexbox card pending">
+                            <h3 class="header_status">Pending Work</h3>
+                            <h2 class="number pending">{{ accepted_len }}</h2>
+                            <button class="pending_button" onclick="go('/admin/pending_panel')">View</button>
+                        </div>
+                        <div class="flexbox card completed">
+                            <h3 class="header_status">Completed work</h3>
+                            <h2 class="number completed">{{ completed_len }}</h2>
+                            <button class="accept_button" onclick="go('/admin/completed_panel')">View</button>
+                        </div>
+                        <div class="flexbox card cancelled">
+                            <h3 class="header_status">Cancelled Work</h3>
+                            <h2 class="number cancelled">{{ rejected_len }}</h2>
+                            <button class="reject_button" onclick="go('/admin/cancelled_panel')">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/static/commission_intro.js"></script>
+
+        
+        <script>
+            function toggle_side_bar() {
+                let sidebar = document.querySelector(".sidebar")
+                sidebar.classList.toggle("collapsed")
+            }
+            function go(where) {
+                window.location.href = where
+            }
+        </script>
+    </body>
+</html>

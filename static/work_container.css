@@ -1,0 +1,174 @@
+.work_container {
+    margin-top: 10px;
+}
+
+.container_content {
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card_body {
+    background-color: #3a2533;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 10px;
+}
+
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.status_box.requested {
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.513);
+    align-self: center;
+    height: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.607);
+    display: flex;
+    box-shadow: 0 0 2px rgba(255,255,255,0.8);
+}
+
+
+.point_color.requested {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 999px;
+    background-color: white;
+    align-self: center;
+    box-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+
+.status_box.pending {
+    padding: 10px;
+    align-self: center;
+    height: 15px;
+    border-radius: 10px;
+    display: flex;
+    /* COLOR */
+    border: 1px solid #5da9ff;
+    background: rgba(93, 169, 255, 0.1);
+    color: #a8d0ff;
+    box-shadow: 0 0 2px rgba(93, 169, 255, 0.6);
+}
+
+.point_color.pending {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 999px;
+    background-color: #5da9ff;
+    align-self: center;
+    box-shadow: 0 0 8px rgba(93, 169, 255, 0.6);
+}
+
+.status_box.cancelled {
+    padding: 10px;
+    align-self: center;
+    height: 15px;
+    border-radius: 10px;
+    display: flex;
+    /* COLOR */
+    border: 1px solid #ff4d6d;
+    background: rgba(255, 77, 110, 0.10);
+    color: #ff9aa9;
+    box-shadow: 0 0 2px rgba(255, 77, 110, 0.6);
+}
+
+.point_color.cancelled {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 999px;
+    background-color: #ff4d6d;
+    align-self: center;
+    box-shadow: 0 0 8px rgba(255, 77, 110, 0.6)
+    ;
+}
+
+.status_box.completed {
+    padding: 10px;
+    align-self: center;
+    height: 15px;
+    border-radius: 10px;
+    display: flex;
+    /* COLOR */
+    border: 1px solid #4fd1a5;
+    background: rgba(79, 209, 165, 0.1);
+    color: #b8ffe0;
+    box-shadow: 0 0 2px rgba(79, 209, 165, 0.6);
+}
+
+.point_color.completed {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 999px;
+    background-color: #4fd1a5;
+    align-self: center;
+    box-shadow: 0 0 8px rgba(79, 209, 165, 0.6)
+    ;
+}
+
+.card_footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.progress_container.admin {
+    background-color: #3a2533;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-items: center;
+}
+
+.progress_bar {
+    width: 0;
+    height: 15px;
+    background: linear-gradient(90deg, #5da9ff, #7cc6ff);
+    border-radius: 999px;
+    transition: width 0.8s ease; /* 👈 ตัวนี้แหละ */
+}
+
+.progress_bar_bg {
+    background-color: #2a1b25;
+    border-radius: 999px;
+    flex: 1;
+    height: 13px;
+    align-self: center;
+    display: flex;
+    overflow: hidden;
+}
+
+.progress_text {
+    align-self: center;
+}
+
+.desc {
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.uid {
+    align-self: center;
+    bottom: 3px;
+    opacity: 30%;
+}

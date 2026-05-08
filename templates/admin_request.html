@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/commission_dashboard.css">
+        <link rel="stylesheet" href="/static/commission_work_pending.css">
+        <link rel="stylesheet" href="/static/kanit_font.css">
+        <link rel="stylesheet" href="/static/common.css">
+        <link rel="stylesheet" href="/static/search_bar_tab.css">
+        <link rel="stylesheet" href="/static/work_container.css">
+        <title>Admin Request Page</title>
+    </head>
+
+    <body>
+        <div class="nav_bar">
+            <!--CONTINUE TOMORROW-->
+            <h3 class="kanit-bold">ADMIN REQUEST DASHBOARD</h3>
+            <!--<input type="search" placeholder="Search here">-->
+            <div id="cover_a_nav_bar" class="box_colored">
+                <img src="/static/assets/P_to.jpg" id="pfp">
+                <a href="/login_google" id="is_login" class="kanit-medium username">Login</a>
+                <div id="dropdown" class="box_colored">
+                    <button class="drop_down_child kanit-semibold">My Profile</button>
+                    <button class="drop_down_child kanit-semibold" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        <!--SIDE MENU (COLLAPSEABLE)-->
+        <div class="main_layout">
+            <div class="sidebar box_colored">
+                <button class="toggle_item" onclick="toggle_side_bar()">☰</button>
+                <div class="menu_item active" onclick="go('/admin')">
+                    <span>📊</span>
+                    <span class="text">DASHBOARD</span>
+                </div>
+                
+                <div class="menu_item" onclick="go('/admin/admin_commission')">
+                    <span>🎨</span>
+                    <span class="text">COMMISSION</span>
+                </div>
+
+                <div class="menu_item">
+                    <span>👤</span>
+                    <span class="text">PROFILE</span>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="pending_title box_colored">
+                    <h1 class="pending_box">REQUESTED WORK</h1>
+                    <p class="pending_box">Total : {{request_len}}<p>
+                </div>
+                <div class="searchbox_parent box_colored">
+                    <p class="search_bar_info">Search here</p>
+                    <input type="text" class="searchbox" placeholder="Search by 'Email' or 'Workname'">
+                    <button class="primary_button_style">Search!</button>
+                </div>
+                {% for work in work_list %}
+                <div class="work_container">
+                    <div class="container_content box_colored">
+                        <div class="card_header">
+                            <h2>{{ work.info[2] }} (Request by {{ work.info[1] }})</h2>
+                            <div class="status_box requested">
+                                <div class="point_color requested"></div>
+                                <span class="status">{{ work.info[4] }}</span>
+                            </div>
+                        </div>
+                        <div class="card_body">
+                            <h4>Description</h4>
+                            <p class="desc">
+                                {{ work.info[3] }}
+                            </p>
+                            <hr>
+                            <h4>OC picture</h4>
+                            <div id="preview_container">
+                                {% for img in work.image %}
+                                <a href="{{ img[0] }}" target="_blank">
+                                    <img src=" {{ img[0] }} ">
+                                </a>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <h4>Price</h4>
+                            <p class="price">
+                                {{ work.info[6] }} THB
+                            </p>
+                            <hr>
+                            <h4>Requested at</h4>
+                            <p class="date_req">
+                                {{ work.info[7] }}
+                            </p>
+                        </div>
+
+                        <div class="card_footer">
+                            <div class="uid">Work UID : {{ work.info[0] }}</div>
+                            <div class="action">
+                                <button class="reject_button action" onclick="request_update({{ work.info[0] }}, 'cancelled')">REJECT</button>
+                                <button class="accept_button action" onclick="request_update({{ work.info[0] }}, 'pending')">ACCEPT</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script src="/static/commission_intro.js"></script>
+        <script src="/static/update_user_db.js"></script>
+        <script>
+            function toggle_side_bar() {
+                let sidebar = document.querySelector(".sidebar")
+                sidebar.classList.toggle("collapsed")
+            }
+            function go(where) {
+                window.location.href = where
+            }
+        </script>
+    </body>
+</html>

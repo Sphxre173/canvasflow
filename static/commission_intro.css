@@ -1,0 +1,156 @@
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    margin: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 0;
+    background-color: #1a0f17;
+    font-family: "Kanit", sans-serif;
+    margin-bottom: 15px;
+    color: white;
+    overflow-y: scroll;
+}
+
+.nav_bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 777;
+    background: rgba(26, 15, 23, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+#cover_a_nav_bar {
+    background: #2a1a24;
+    border: 1px solid #9f5d85;
+    position: relative;
+    border-radius: 999px;
+    padding: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#is_login {
+    text-decoration: none;
+    padding-right: 4px;
+    color: white;
+}
+
+#pfp {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    visibility: hidden;
+}
+
+.username {
+    font-size: 13px;
+}
+
+#top_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: #2a1a24;
+    border: 1px solid #9f5d85;
+    border-radius: 20px;
+}
+
+.p_to {
+    width: 115px;
+    height: 115px;
+    border-radius: 15px;
+}
+
+.card_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.card {
+    background: #2a1a24;
+    border-radius: 15px;
+    padding: 15px;
+    
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+    border: 1px solid #9f5d85;
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin-top: 10px;
+    margin-bottom: 6px;
+    opacity: 0.7;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+้h3 {
+    margin: 0;
+}
+
+.card.big {
+    grid-column: span 3;
+    text-align: left;
+    
+}
+
+.many_more {
+    font-weight: 900;
+    font-size: 50px;
+    padding: 0;
+    padding-left: 30px;
+}
+
+#dropdown {
+    position: absolute;
+    top: 28px;
+    right: 10px;
+    background: #2a1922;
+    border-radius: 5px;
+    border: 1px solid #9f5d85;
+    display: none;  
+    flex-direction: column;
+}
+
+#cover_a_nav_bar:hover #dropdown {
+    display: flex;
+}
+
+.drop_down_child {
+    padding: 5px;
+    padding-left: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    border: none;
+}
+
+.drop_down_child:hover {
+    padding: 5px;
+    padding-left: 5px;
+    background: #5a3549;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
