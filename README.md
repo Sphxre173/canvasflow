@@ -1,4 +1,4 @@
-# canvasflow
+# canvasflow (v0.9)
 A Flask-based commission workflow and request management system.
 
 Heya its sphere here! this projust was maded by me to learn how to use flask along the way with JavaScript, HTML, CSS!
